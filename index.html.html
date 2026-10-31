@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TRANSFORM8 · 8-Week Tracker</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#14161a;--mut:#6b7280;--line:#e2e5ea;--or:#e8401f;--lime:#4d7c0f;--ok:#16a34a;--okbg:#dcfce7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0b0e;--card:#14161b;--ink:#f3f4f6;--mut:#9aa1ad;--line:#262a32;--or:#ff4a2b;--lime:#b6f23a;--ok:#22c55e;--okbg:#0f3d22;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a0b0e;--card:#14161b;--ink:#f3f4f6;--mut:#9aa1ad;--line:#262a32;--or:#ff4a2b;--lime:#b6f23a;--ok:#22c55e;--okbg:#0f3d22;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto;padding:12px 12px 90px}
+h1{font-size:22px;margin:4px 0;letter-spacing:.5px}h1 b{color:var(--or)}h2{font-size:17px;margin:0 0 8px}
+.sub{color:var(--mut);font-size:13px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;padding:12px 4px;background:none;border:0;color:var(--mut);font-weight:600;font-size:13px}
+nav button.on{color:var(--or);border-top:2px solid var(--or)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{justify-content:space-between}
+.chip{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700;border:1px solid var(--line);color:var(--mut)}
+.chip.or{color:var(--or);border-color:var(--or)}
+.bar{height:10px;border-radius:9px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--or);transition:width .3s}.bar.g i{background:var(--ok)}
+.done-banner{background:var(--ok);color:#fff;border-radius:14px;padding:16px;text-align:center;font-weight:800;font-size:18px;margin:10px 0}
+.todo-banner{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:10px;text-align:center;color:var(--mut);font-size:13px}
+.ck{display:flex;align-items:center;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line);cursor:pointer}
+.ck:last-child{border:0}
+.box{width:26px;height:26px;border-radius:7px;border:2px solid var(--mut);display:grid;place-items:center;flex:none;font-weight:900;color:#fff}
+.box.on{background:var(--ok);border-color:var(--ok)}
+.ex{border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0}
+.ex.ok{border-color:var(--ok);background:var(--okbg)}
+.sets{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.sets .box{width:38px;height:38px;font-size:14px}
+input,select{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px;font:inherit;width:100%;min-width:0}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+label{font-size:11px;color:var(--mut);display:block}
+button.b{background:var(--or);color:#fff;border:0;border-radius:10px;padding:9px 14px;font-weight:700}
+button.b.o{background:none;border:1px solid var(--line);color:var(--ink)}
+.wk{display:grid;grid-template-columns:34px repeat(7,1fr);gap:4px;align-items:center;margin:4px 0}
+.dd{border:1px solid var(--line);border-radius:8px;padding:5px 0;text-align:center;font-size:11px;background:var(--card);color:var(--ink);line-height:1.2}
+.dd.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.dd.cur{outline:2px solid var(--or)}.dd.part{border-color:var(--or)}
+.big{font-size:26px;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}
+.tag{font-size:11px;color:var(--lime);font-weight:700}
+.bars{display:flex;gap:6px;align-items:flex-end;height:90px}.bars div{flex:1;text-align:center;font-size:11px}.bars i{display:block;background:var(--or);border-radius:5px 5px 0 0;margin-bottom:3px}
+.badges{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.bdg{border:1px solid var(--line);border-radius:12px;padding:8px 2px;text-align:center;font-size:10.5px;opacity:.35;line-height:1.2}.bdg.on{opacity:1;border-color:var(--ok);background:var(--okbg)}.bdg b{font-size:22px;display:block}
+textarea{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px;font:inherit;width:100%}
+.srow{display:grid;grid-template-columns:38px 1fr 1fr;gap:6px;align-items:center;margin:5px 0}.srow .box{width:38px;height:38px;font-size:14px}
+#tm{display:none;position:fixed;left:8px;right:8px;bottom:calc(52px + env(safe-area-inset-bottom,0px));z-index:6;background:var(--card);border:2px solid var(--or);border-radius:12px;padding:8px;gap:8px;align-items:center;max-width:744px;margin:0 auto}
+#toast{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--ok);color:#fff;padding:10px 16px;border-radius:99px;font-weight:700;opacity:0;transition:opacity .3s;z-index:9;pointer-events:none;text-align:center}
+.pop{animation:pop .5s ease}@keyframes pop{0%{transform:scale(.8);opacity:0}70%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+</style></head><body>
+<header><h1>TRANSFORM<b>8</b> · 8-WEEK TRACKER</h1><div class="sub">Tick every set. Finish the list → green “workout finished”.</div></header>
+<main id="app"></main>
+<div id="toast"></div><div id="tm"><b id="tt"></b><div class="bar" style="flex:1"><i id="tb"></i></div><button class="b o" data-a="r-">−15</button><button class="b o" data-a="r+">+15</button><button class="b o" data-a="rx">Skip</button></div>
+<nav id="nav"></nav>
+<script>
+const SCH=[['A','Upper Body · Push','Chest / Shoulders / Triceps'],['B','Lower Body','Quads / Glutes / Hamstrings / Calves'],['Walk','Walk','Easy 20–30 min walk'],['C','Upper Body · Pull','Back / Biceps / Rear Delts'],['D','Full Body + Core','Conditioning / Core / Mobility'],['Mob','Mobility','Gentle stretching & mobility'],['Rec','Active Recovery','Light movement, hydrate, sleep']];
+const EX={A:[['Push-Up','Barbell or Dumbbell Bench Press'],['Dumbbell Shoulder Press','Barbell Overhead Press'],['Incline Push-Up','Incline Dumbbell Press'],['Dumbbell Lateral Raise','Cable Lateral Raise'],['Bench Dip','Tricep Pushdown'],['Plank Shoulder Tap','Cable Plank Press-Out']],
+B:[['Bodyweight Squat','Barbell Back Squat'],['Walking Lunge','Dumbbell Walking Lunge'],['Glute Bridge','Barbell Hip Thrust'],['Romanian Deadlift (DB)','Barbell Romanian Deadlift'],['Standing Calf Raise','Calf Raise Machine'],['Wall Sit','Leg Press Hold']],
+C:[['Bent-Over Dumbbell Row','Barbell Row'],['Inverted Row (table/bar)','Lat Pulldown'],['Superman Hold','Back Extension'],['Dumbbell Bicep Curl','Barbell Curl'],['Band Pull-Apart','Face Pull'],['Farmer’s Carry','Farmer’s Carry (heavy DB)']],
+D:[['Burpee','Burpee Box Step-Up'],['Dumbbell Swing','Kettlebell Swing'],['Mountain Climbers','Mountain Climbers (sliders)'],['Russian Twist','Cable Russian Twist'],['Bicycle Crunch','Hanging Knee Raise'],['Plank Hold','Weighted Plank Hold']]};
+const WARM=[['Arm Circles','20 sec each direction'],['Bodyweight Squat','10 reps, slow'],['Walking Knee Hug','10 steps each leg'],['Inchworm to Push-Up','5 reps'],['Jumping Jacks','30 sec']];
+const COOL=[['Standing Quad Stretch','30 sec each side'],['Seated Hamstring Reach','30 sec each side'],['Chest Doorway Stretch','30 sec each side'],['Cross-Body Shoulder Stretch','30 sec each side'],['Child’s Pose','45 sec, breathe slowly']];
+const P=[0,{n:'Foundation',s:3,r:'10-12',rest:'60 sec',rpe:'6-7 (comfortable effort)',d:'Learn every movement pattern with clean form and build the habit.'},
+{n:'Build',s:4,r:'8-10',rest:'75 sec',rpe:'7-8 (challenging, 2-3 reps in reserve)',d:'Add volume. Pair the last two moves of each day as a superset.'},
+{n:'Intensify',s:4,r:'6-10',rest:'90 sec',rpe:'8 (1-2 reps in reserve)',d:'Slow the lowering phase (3 sec) on exercise #1 each day; push closer to failure.'},
+{n:'Peak',s:5,r:'5-8',rest:'90-120 sec',rpe:'9 (near max effort)',d:'Heaviest, hardest sets. Week 7 = heaviest. Week 8 = half volume + retest.'}];
+const RPE=[['10','Max effort','Could not do one more rep.'],['9','Near max','Maybe 1 more rep possible.'],['8','Hard','2 reps left in the tank.'],['7','Challenging','3 reps left in the tank.'],['6','Moderate','4+ reps left, breathing up.'],['5 or below','Easy','Warm-up weight, no real effort.']];
+const BENCH=[['pu','Max Push-Ups (60 sec)'],['sq','Bodyweight Squat (max reps, 60 sec)'],['pl','Plank Hold (seconds)'],['rw','Row/Pull — heaviest × 8 reps (kg)']];
+const DN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const pd=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+let S;try{S=JSON.parse(localStorage.getItem('t8'))}catch(e){}
+S=S||{start:iso(new Date()),c:{},l:{},b:[],bs:{},re:{},gym:0};
+const save=()=>{try{localStorage.setItem('t8',JSON.stringify(S))}catch(e){}};
+const ph=w=>Math.ceil(w/2),sets=w=>w==8?3:P[ph(w)].s,isT=d=>'ABCD'.includes(SCH[d][0]);
+const dayIdx=()=>Math.floor((new Date().setHours(0,0,0,0)-pd(S.start))/864e5);
+const cur=()=>{const i=Math.max(0,dayIdx());return{w:Math.min(8,Math.floor(i/7)+1),d:Math.min(i,55)%7}};
+let tab='w',sel=cur();
+// items of a session
+function items(w,d){const k=w+'_'+d,a=[];if(!isT(d))return[k+'r'];const c=SCH[d][0];
+WARM.forEach((_,i)=>a.push(k+'w'+i));EX[c].forEach((_,i)=>{for(let j=0;j<sets(w);j++)a.push(k+'e'+i+'s'+j)});COOL.forEach((_,i)=>a.push(k+'c'+i));return a}
+const stat=(w,d)=>{const a=items(w,d),n=a.filter(x=>S.c[x]).length;return{n,t:a.length,ok:n==a.length}};
+const wkDone=w=>[0,1,3,4].filter(d=>stat(w,d).ok).length;
+const total=()=>{let n=0;for(let w=1;w<=8;w++)n+=wkDone(w);return n};
+function streak(){const i=Math.min(55,dayIdx());let a=[];for(let x=0;x<=i;x++){const w=Math.floor(x/7)+1,d=x%7;if(isT(d))a.push(stat(w,d).ok)}
+if(a.length&&!a[a.length-1]&&i>=0)a.pop();let s=0;for(let x=a.length-1;x>=0&&a[x];x--)s++;return s}
+function prs(){const m={};for(const k in S.l){const wt=+S.l[k].wt;if(!wt)continue;const q=k.match(/^(\d+)_(\d)e(\d)(?:s\d)?$/);if(!q)continue;const n=EX[SCH[+q[2]][0]][+q[3]][0],r=+S.l[k].reps||0;if(!m[n]||wt>m[n].wt||(wt==m[n].wt&&r>m[n].reps))m[n]={wt,reps:r,e1:r?Math.round(wt*(1+r/30)):wt}}return m}
+const $=s=>document.querySelector(s);
+function ckRow(k,t,s,on){return `<div class="ck" data-k="${k}"><div class="box ${on?'on':''}">${on?'✓':''}</div><div><b>${t}</b> <span class="sub">${s}</span></div></div>`}
+function workout(){const{w,d}=sel,[c,nm,mu]=SCH[d],p=P[ph(w)],st=stat(w,d),k=w+'_'+d,dt=new Date(pd(S.start).getTime()+((w-1)*7+d)*864e5);
+let h=`<div class="card"><div class="row sp"><div><span class="chip or">WEEK ${w} · ${p.n.toUpperCase()}</span> <span class="chip">${DN[dt.getDay()]} ${dt.getDate()}/${dt.getMonth()+1}</span></div><div class="row"><button class="b o" data-a="prev">‹</button><button class="b o" data-a="today">Today</button><button class="b o" data-a="next">›</button></div></div>
+<h2 style="margin-top:10px">${isT(d)?'Day '+c+' · ':''}${nm}</h2><div class="sub">${mu}</div>
+<div class="bar ${st.ok?'g':''}" style="margin-top:10px"><i id="pb" style="width:${st.n/st.t*100}%"></i></div><div class="sub" id="pt">${st.n} / ${st.t} ticked</div></div>`;
+h+=st.ok?`<div class="done-banner pop">✅ TODAY’S WORKOUT FINISHED — GREAT WORK!<div style="font-size:13px;font-weight:600;margin-top:6px">${FIN[(w+d)%4]}</div>${wkDone(w)==4?'<div style="margin-top:6px">🏆 WEEK '+w+' COMPLETE!</div>':''}${total()==32?'<div style="margin-top:6px">🎉 PROGRAM COMPLETE. YOU DID IT!</div>':''}</div>`:`<div class="todo-banner">Tick everything below to turn this green<br><i>“${Q(w,d)}”</i></div>`;
+if(!isT(d)){const R={Walk:['20–30 minutes at an easy pace, you should be able to talk comfortably','Walk outdoors if you can; sunlight helps sleep','Drink water before and after','Finish with 2 minutes of slow breathing'],Mob:['10–15 minutes of gentle stretching, no pushing into pain','Hips: 30 sec each side of a low lunge hold','Shoulders: arm circles and cross-body stretch','Spine: cat-cow x 10, then Child’s Pose 45 sec','Hamstrings: seated reach 30 sec each side'],Rec:['Keep it light: easy walk, stairs, or play','No hard training today; this is when muscle repairs','Plan and prep your meals for the next training day','Aim for 7+ hours of sleep tonight','Check your measurements if it is the end of the week']};h+=`<div class="card"><h2>Suggestions</h2><ul style="margin:0;padding-left:20px">${R[c].map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="card">${ckRow(k+'r',nm+' done',mu,S.c[k+'r'])}</div>`;return h}
+if(w==1&&d==0)h+=`<div class="card">📏 <b>Baseline day:</b> before your first session, record your 4 benchmark numbers in the Progress tab.</div>`;
+if(w==8&&d==4)h+=`<div class="card">🏁 <b>Retest day:</b> redo the 4 benchmarks under the same conditions and log them in the Progress tab.</div>`;
+h+=`<div class="card"><div class="row sp"><b>Target:</b><span>${sets(w)} sets × ${p.r} reps · rest ${p.rest} · RPE ${p.rpe.split(' ')[0]}</span></div><div class="sub">${w==8?'Week 8 taper: volume halved. ':''}${p.d}</div><div style="margin-top:6px"><b>RPE ${p.rpe}</b></div><details><summary class="sub">What does RPE mean?</summary><table>${RPE.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="sub">${r[2]}</td></tr>`).join('')}</table></details>
+<div class="row" style="margin-top:6px"><label><input type="checkbox" data-a="gym" ${S.gym?'checked':''} style="width:auto"> Show gym swaps</label></div></div>`;
+h+=`<div class="card"><h2>🔥 5-Minute Warm-Up</h2>${WARM.map((x,i)=>ckRow(k+'w'+i,x[0],x[1],S.c[k+'w'+i])).join('')}</div>`;
+EX[c].forEach((e,i)=>{const ek=k+'e'+i,L=S.l[ek]||{};let ok=true,b='';for(let j=0;j<sets(w);j++){const on=S.c[ek+'s'+j];ok=ok&&on;const Lj=S.l[ek+'s'+j]||{},sg=sug(w,d,i,j);b+=`<div class="srow"><div class="box ${on?'on':''}" data-k="${ek}s${j}">${on?'✓':j+1}</div><input type="number" inputmode="decimal" placeholder="${sg.wt??'kg'}" data-l="${ek}s${j}|wt" value="${Lj.wt??''}"><input type="number" inputmode="numeric" placeholder="${sg.reps??'reps'}" data-l="${ek}s${j}|reps" value="${Lj.reps??''}"></div>`}
+const tg=(i==0&&ph(w)==3?'<span class="tag"> ⏱ 3-sec lowering</span>':'')+(ph(w)==2&&i>=4?'<span class="tag"> ⚡ superset</span>':'')+(i==5?'<span class="chip or">FINISHER</span>':'');
+h+=`<div class="ex ${ok?'ok':''}"><b>${i+1}. ${e[0]}</b> ${tg}${S.gym?`<div class="sub">Gym swap: ${e[1]}</div>`:''}<div class="sub">💡 ${CUE[e[0]]||''}</div>${lastTxt(w,d,i)}${b}
+<div class="g3" style="grid-template-columns:1fr"><div><label>RPE for this exercise (6-10)</label><input type="number" inputmode="decimal" data-l="${ek}|rpe" value="${L.rpe??''}"></div></div></div>`});
+h+=`<div class="card"><h2>🧊 Cool-Down & Stretch</h2>${COOL.map((x,i)=>ckRow(k+'c'+i,x[0],x[1],S.c[k+'c'+i])).join('')}</div><div class="card"><h2>📝 Session notes</h2><textarea data-n="${k}" rows="3" placeholder="Energy, sleep, pain, wins…">${S.n?.[k]||''}</textarea></div>`;return h}
+function plan(){let h=`<div class="card"><div class="row sp"><b>Program start date</b><input type="date" value="${S.start}" data-a="start" style="width:auto"></div><div class="sub">4 on, 3 off. Plan assumes a Saturday start. Tap any day to open it.</div></div><div class="card">`;
+const t=cur();h+=`<div class="wk sub"><span></span>${SCH.map((s,i)=>`<span style="text-align:center">${DN[(pd(S.start).getDay()+i)%7]}</span>`).join('')}</div>`;
+for(let w=1;w<=8;w++){h+=`<div class="wk"><b style="font-size:12px">W${w}</b>`;for(let d=0;d<7;d++){const s=stat(w,d),c=(w==t.w&&d==t.d)?' cur':'';h+=`<div class="dd ${s.ok?'ok':s.n?'part':''}${c}" data-go="${w},${d}">${isT(d)?SCH[d][0]:SCH[d][0].slice(0,3)}<br>${s.ok?'✓':s.n?Math.round(s.n/s.t*100)+'%':'·'}</div>`}h+='</div>'}
+h+=`</div><div class="card sub">A = Push · B = Legs · C = Pull · D = Core · Walk / Mob / Rec = rest-day activity. Phases: W1-2 Foundation, W3-4 Build, W5-6 Intensify, W7-8 Peak.</div>`;return h}
+const QT=['Small steps every day beat big steps once.','You don\u2019t have to be extreme, just consistent.','Form first. Strength follows.','Discipline is choosing what you want most over what you want now.','Your future self is watching. Make them proud.','Tired is a feeling. Showing up is a decision.','Every rep is a vote for who you\u2019re becoming.','Progress, not perfection.','The hardest rep is the one through the door.','Eight weeks from now you\u2019ll be glad you started.'];
+const Q=(w,d)=>QT[(w*3+d)%QT.length];
+const FIN=['Session banked. Recovery starts now: water, protein, sleep.','Another one done. Momentum is building.','That\u2019s how it\u2019s done. Own it.','Most people quit before this point. You didn\u2019t.'];
+let CX='Push-Up',CM='wt';
+const allEx=[...new Set(Object.values(EX).flat().map(e=>e[0]))],MN={wt:'Weight (kg)',wa:'Waist (cm)',ch:'Chest (cm)',ar:'Arms (cm)',hi:'Hips (cm)',bf:'Body fat %'};
+function lc(ser,lab){const W=300,H=140,L=30,R=8,T=10,B=22,v=ser.flatMap(s=>s.v.filter(x=>x!=null));if(!v.length)return '<div class="sub">No data yet. Log entries and your curve will appear here.</div>';
+let mn=Math.min(...v),mx=Math.max(...v),z=mn>=0;if(mn==mx){mn-=1;mx+=1}const p=(mx-mn)*.1;mn=Math.floor(mn-p);mx=Math.ceil(mx+p);if(z&&mn<0)mn=0;
+const X=i=>L+(lab.length>1?i*(W-L-R)/(lab.length-1):(W-L-R)/2),Y=y=>T+(H-T-B)*(1-(y-mn)/(mx-mn));
+let o=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto"><g stroke="var(--line)"><line x1="${L}" x2="${W-R}" y1="${Y(mn)}" y2="${Y(mn)}"/><line x1="${L}" x2="${W-R}" y1="${Y(mx)}" y2="${Y(mx)}"/></g><g fill="var(--mut)" font-size="9"><text x="1" y="${Y(mx)+3}">${+mx.toFixed(1)}</text><text x="1" y="${Y(mn)+3}">${+mn.toFixed(1)}</text>${lab.map((t,i)=>`<text x="${X(i)}" y="${H-6}" text-anchor="middle">${t}</text>`).join('')}</g>`;
+ser.forEach(s=>{let d='',pen=0;s.v.forEach((y,i)=>{if(y==null){pen=0;return}d+=(pen?'L':'M')+X(i)+' '+Y(y);pen=1});o+=`<path d="${d}" fill="none" stroke="${s.c}" stroke-width="2.5" ${s.dash?'stroke-dasharray="5 4"':''}/>`;s.v.forEach((y,i)=>{if(y!=null)o+=`<circle cx="${X(i)}" cy="${Y(y)}" r="3.5" fill="${s.c}"/>`})});
+return o+'</svg><div class="row sub">'+ser.map(s=>`<span><b style="color:${s.c}">\u25cf</b> ${s.n}</span>`).join('')+'</div>'}
+function curves(){const W8=[1,2,3,4,5,6,7,8],wl=W8.map(x=>'W'+x),cw=cur().w;let cum=0;
+const act=W8.map(x=>(cum+=wkDone(x),x<=cw?cum:null)),tgt=W8.map(x=>x*4);
+const planR=[6.5,6.5,7.5,7.5,8,8,9,9];
+const actR=W8.map(x=>{const a=[];for(const k in S.l){const m=k.match(/^(\d+)_/);if(m&&+m[1]==x&&S.l[k].rpe)a.push(+S.l[k].rpe)}return a.length?+(a.reduce((s,y)=>s+y)/a.length).toFixed(1):null});
+const sw=W8.map(x=>{let b=null;for(const k in S.l){const m=k.match(/^(\d+)_(\d)e(\d)(?:s\d)?$/);if(!m||+m[1]!=x||EX[SCH[+m[2]][0]][+m[3]][0]!=CX)continue;const v=+S.l[k].wt;if(v&&(b==null||v>b))b=v}return b});
+const be=S.b.filter(x=>x[CM]);const opt=(a,c,f)=>a.map(x=>`<option value="${f?x[0]:x}" ${(f?x[0]:x)==c?'selected':''}>${f?x[1]:x}</option>`).join('');
+return `<div class="card"><h2>\ud83d\udcc8 Workout completion curve</h2><div class="sub">Your total workouts vs the 4-a-week target. Stay on or above the dashed line.</div>${lc([{n:'Target',c:'#9aa1ad',dash:1,v:tgt},{n:'You',c:'#22c55e',v:act}],wl)}</div>
+<div class="card"><h2>🏋️ Training volume curve</h2><div class="sub">Total kg lifted per week (weight × reps from your set log). Rising volume = progressive overload.</div>${lc([{n:'kg lifted',c:'#ff4a2b',v:W8.map(x=>{let s=0;for(const k in S.l){const m=k.match(/^(\d+)_\d+e\d+s\d$/);if(m&&+m[1]==x)s+=(+S.l[k].wt||0)*(+S.l[k].reps||0)}return s||null})}],wl)}</div>
+<div class="card"><h2>\ud83d\udd25 Effort progression curve</h2><div class="sub">Planned RPE rises each phase. Your logged average RPE should follow it.</div>${lc([{n:'Plan',c:'#9aa1ad',dash:1,v:planR},{n:'Your avg RPE',c:'#ff4a2b',v:actR}],wl)}</div>
+<div class="card"><h2>\ud83d\udcaa Strength curve</h2><select data-sel="CX">${opt(allEx,CX)}</select><div class="sub" style="margin:4px 0">Best weight (kg) per week. Bodyweight moves stay flat; track reps instead.</div>${lc([{n:CX,c:'#ff4a2b',v:sw}],wl)}</div>
+<div class="card"><h2>\ud83d\udcc9 Body curve</h2><select data-sel="CM">${opt(Object.entries(MN),CM,1)}</select>${lc([{n:MN[CM],c:'#4d9bff',v:be.map(x=>+x[CM])}],be.map(x=>x.d.slice(5)))}</div>`}
+function badges(){const t=total(),F=x=>[1,2,3,4,5,6,7,8].some(w=>wkDone(w)==4),b=[['\ud83d\ude80','First workout',t>=1],['\ud83d\udd25','3-workout streak',streak()>=3],['\ud83d\udcc5','Perfect week',F()],['\ud83e\uddf1','Phase 1 done',wkDone(1)+wkDone(2)==8],['\u26a1','Phase 2 done',wkDone(3)+wkDone(4)==8],['\ud83c\udfd4\ufe0f','Phase 3 done',wkDone(5)+wkDone(6)==8],['\ud83d\udccf','Baseline logged',BENCH.every(([k])=>S.bs[k])],['\ud83d\udcaa','Halfway',t>=16],['\ud83c\udfc1','Retest logged',BENCH.every(([k])=>S.re[k])],['\ud83d\udc51','Program complete',t>=32]];
+return `<div class="card"><h2>\ud83c\udfc5 Badges <span class="sub">${b.filter(x=>x[2]).length} of ${b.length}</span></h2><div class="badges">${b.map(x=>`<div class="bdg ${x[2]?'on':''}"><b>${x[0]}</b>${x[1]}</div>`).join('')}</div></div>`}
+function level(t){const L=[[0,'Starter'],[2,'Builder'],[6,'Climber'],[12,'Challenger'],[20,'Machine'],[32,'Transformed']];let i=0;L.forEach((x,j)=>{if(t>=x[0])i=j});const n=L[i+1];
+return `<div class="card"><div class="row sp"><div><div class="sub">YOUR LEVEL</div><div class="big">${i+1}. ${L[i][1]}</div></div><div class="sub" style="text-align:right">${n?(n[0]-t)+' more workout'+(n[0]-t>1?'s':'')+' to<br><b>'+n[1]+'</b>':'Max level \ud83c\udf89'}</div></div><div class="bar" style="margin-top:8px"><i style="width:${n?(t-L[i][0])/(n[0]-L[i][0])*100:100}%"></i></div></div>`}
+const CUE={'Push-Up':'Straight body line, chest to floor, elbows ~45°.','Dumbbell Shoulder Press':'Ribs down, press straight up, no back arch.','Incline Push-Up':'Hands on a raised surface, keep the same straight line.','Dumbbell Lateral Raise':'Lead with elbows, stop at shoulder height.','Bench Dip':'Elbows back, lower to ~90°, shoulders down.','Plank Shoulder Tap':'Feet wide, keep hips still while tapping.','Bodyweight Squat':'Chest up, knees track toes, sit to parallel.','Walking Lunge':'Long step, back knee near floor, torso tall.','Glute Bridge':'Drive through heels, squeeze at the top.','Romanian Deadlift (DB)':'Hips back, flat back, soft knees, feel the hamstrings.','Standing Calf Raise':'Full stretch at the bottom, pause at the top.','Wall Sit':'Thighs parallel, back flat on the wall.','Bent-Over Dumbbell Row':'Hinge forward, flat back, pull elbow to hip.','Inverted Row (table/bar)':'Body straight, pull chest to the bar.','Superman Hold':'Lift arms and legs, neck neutral, hold.','Dumbbell Bicep Curl':'Elbows pinned to your sides, no swinging.','Band Pull-Apart':'Straight arms, squeeze shoulder blades.','Farmer’s Carry':'Tall posture, tight core, short steady steps.','Burpee':'Chest to floor, explosive jump, land softly.','Dumbbell Swing':'Hinge and snap the hips; arms just guide.','Mountain Climbers':'Shoulders over wrists, drive knees fast.','Russian Twist':'Lean back, rotate from the ribs.','Bicycle Crunch':'Slow, elbow to opposite knee.','Plank Hold':'Straight line, squeeze glutes and abs.'};
+let TM={end:0,tot:1},AC;
+function toast(m){const e=$('#toast');e.textContent=m;e.style.opacity=1;clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.opacity=0,2800)}
+function beep(){try{AC=AC||new AudioContext();const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.frequency.value=880;g.gain.value=.2;o.start();o.stop(AC.currentTime+.4)}catch(e){}try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}}
+function rest(s){TM={end:Date.now()+s*1e3,tot:s,f:0};tm()}
+function tm(){const el=$('#tm');if(!TM.end){el.style.display='none';return}const r=Math.ceil((TM.end-Date.now())/1e3);el.style.display='flex';
+if(r<=0){if(!TM.f){TM.f=1;beep()}$('#tt').textContent='✅ Go!';$('#tb').style.width='100%';if(r<-4)TM.end=0;return}
+$('#tt').textContent='⏱ '+Math.floor(r/60)+':'+String(r%60).padStart(2,'0');$('#tb').style.width=Math.min(100,r/TM.tot*100)+'%'}
+setInterval(tm,250);
+const lastS=(w,d,i)=>{for(let x=w-1;x>=1;x--){const a=[];for(let j=0;j<5;j++){const e=S.l[x+'_'+d+'e'+i+'s'+j];a.push(e&&(e.wt||e.reps)?e:null)}if(a.some(Boolean))return a}};
+function sug(w,d,i,j){const a=lastS(w,d,i);let s=a&&(a[j]||a.filter(Boolean).pop());if(!s)s=S.l[w+'_'+d+'e'+i+'s'+(j-1)]||{};return{wt:s.wt||null,reps:s.reps||null}}
+function lastTxt(w,d,i){const a=lastS(w,d,i);if(!a)return '<div class="sub">First time: choose a weight you can control with clean form.</div>';const f=a.filter(Boolean),top=Math.max(...f.map(x=>+x.wt||0)),up=parseInt(P[ph(w)].r.split('-')[1]),hit=top>0&&f.every(x=>+x.reps>=up);
+return `<div class="sub">Last: ${f.map(x=>(x.wt||'BW')+'×'+(x.reps||'?')).join(', ')}${hit?` · 💡 you hit ${up} reps, try ${top+2.5} kg`:''}</div>`}
+function tick(key){const on=S.c[key]=!S.c[key],m=key.match(/^(\d+)_(\d)e(\d)s(\d)$/);
+if(on&&m){const[w,d,i,j]=m.slice(1).map(Number),L=S.l[key]=S.l[key]||{},sg=sug(w,d,i,j);if(!L.wt&&sg.wt)L.wt=sg.wt;if(!L.reps&&sg.reps)L.reps=sg.reps;
+const n=EX[SCH[d][0]][i][0],wt=+L.wt;let best=0;for(const k in S.l){if(k==key)continue;const q=k.match(/^(\d+)_(\d)e(\d)(?:s\d)?$/);if(q&&EX[SCH[+q[2]][0]][+q[3]][0]==n)best=Math.max(best,+S.l[k].wt||0)}
+if(wt>0&&best>0&&wt>best)toast('🏆 New PR! '+n+' '+wt+' kg');if(!(i==5&&j==sets(w)-1))rest(parseInt(P[ph(w)].rest))}
+save();const y=scrollY;draw();scrollTo(0,y);if(on&&m&&stat(+m[1],+m[2]).ok)toast('✅ Workout complete!')}
+function pc(){const t=+$('#pcw').value,b=+$('#pcb').value||20;let r=(t-b)/2;const o=[];if(!(t>b)){$('#pcr').textContent=t?'Target must be above the bar weight.':'Enter a target weight.';return}
+[25,20,15,10,5,2.5,1.25].forEach(p=>{const n=Math.floor(r/p+1e-9);if(n){o.push(n+'×'+p);r-=n*p}});$('#pcr').innerHTML='<b>Per side:</b> '+o.join(' + ')+(r>.01?'<br>'+(r*2).toFixed(2)+' kg left over with these plates.':'')}
+function progress(){const t=total(),w=cur().w,bw=S.b.filter(x=>x.wt),sw=bw[0]?.wt,cw=bw.at(-1)?.wt;const m=prs();
+let h=`<div class="g2"><div class="card"><div class="sub">CURRENT WEEK</div><div class="big">${w}<span class="sub"> of 8</span></div></div><div class="card"><div class="sub">WORKOUTS DONE</div><div class="big">${t}<span class="sub"> of 32</span></div></div>
+<div class="card"><div class="sub">THIS WEEK</div><div class="big">${wkDone(w)}<span class="sub"> of 4</span></div></div><div class="card"><div class="sub">STREAK 🔥</div><div class="big">${streak()}<span class="sub"> workouts</span></div></div></div>
+${level(t)}<div class="card"><h2>Overall completion</h2><div class="bar g"><i style="width:${t/32*100}%"></i></div><div class="sub">${Math.round(t/32*100)}% of the program</div></div>
+<div class="card"><h2>Weekly consistency</h2><div class="bars">${[1,2,3,4,5,6,7,8].map(x=>`<div><i style="height:${wkDone(x)*20}px;background:${wkDone(x)==4?'var(--ok)':'var(--or)'}"></i>W${x}<br><b>${wkDone(x)}</b></div>`).join('')}</div></div>
+${curves()}${badges()}<div class="card"><h2>Week 1 vs Week 8 retest</h2><table><tr><th>Benchmark</th><th>Wk 1</th><th>Wk 8</th><th>Δ</th></tr>${BENCH.map(([k,n])=>{const a=S.bs[k],b=S.re[k],df=(a!==''&&a!=null&&b!==''&&b!=null)?(b-a):'-';return `<tr><td>${n}</td><td><input type="number" data-r="bs|${k}" value="${a??''}"></td><td><input type="number" data-r="re|${k}" value="${b??''}"></td><td><b class="dl" id="df${k}" style="color:var(--ok)">${df>0?'+':''}${df}</b></td></tr>`}).join('')}</table></div>
+<div class="card"><h2>Body measurements</h2><div class="sub">Weekly, same time & scale. Start ${sw??'-'} kg · Now ${cw??'-'} kg · Change ${sw&&cw?((cw-sw>0?'+':'')+(cw-sw).toFixed(1)):'-'} kg</div>
+<div class="g3" style="margin:8px 0">${[['wt','Weight kg'],['wa','Waist cm'],['ch','Chest cm'],['ar','Arms cm'],['hi','Hips cm'],['bf','Body fat %']].map(([k,n])=>`<div><label>${n}</label><input type="number" inputmode="decimal" id="m_${k}"></div>`).join('')}</div><button class="b" data-a="addm">Save entry</button>
+<table style="margin-top:8px"><tr><th>Date</th><th>kg</th><th>Waist</th><th>Chest</th><th>Arms</th><th>Hips</th><th>BF%</th></tr>${S.b.map(x=>`<tr><td>${x.d.slice(5)}</td><td>${x.wt||''}</td><td>${x.wa||''}</td><td>${x.ch||''}</td><td>${x.ar||''}</td><td>${x.hi||''}</td><td>${x.bf||''}</td></tr>`).join('')}</table></div>
+<div class="card"><h2>Personal records (best weight)</h2>${Object.keys(m).length?`<table>${Object.entries(m).map(([n,v])=>`<tr><td>${n}</td><td><b>${v.wt} kg × ${v.reps||'?'}</b></td><td class="sub">est. 1RM ${v.e1}</td></tr>`).join('')}</table>`:'<div class="sub">Log weights in your workouts and your bests appear here.</div>'}</div>
+<div class="card"><h2>💾 Backup & restore</h2><div class="sub">Copy your data to keep it safe or move it to another device. On the new device, paste it here and tap Import.</div><textarea id="bk" rows="3" placeholder="Paste backup here to import" style="margin:6px 0"></textarea><div class="row"><button class="b" data-a="cp">Copy backup</button><button class="b o" data-a="imp">Import</button><button class="b o" data-a="reset">Reset all data</button></div></div>`;return h}
+function guide(){return `<div class="card"><h2>How this program works</h2><p><b>1. Match the moves to your GIFs.</b> Every exercise is written by name. Find the matching move in your GIF library and use it as your form guide for every set.</p><p><b>2. Follow the weekly calendar.</b> The Plan tab shows which of the 4 workout days (A, B, C, D) you train each day, for all 8 weeks.</p><p><b>3. Apply the phase, not just the day.</b> Sets, reps, rest and effort change every 2 weeks. The exercises stay the same, only the demand goes up. The Workout tab shows the numbers for you.</p><p><b>4. Log everything.</b> Tick your sets and record weight, reps and RPE. You cannot manage what you do not measure.</p><p><b>5. Retest in Week 8.</b> The final week is a taper plus retest, so you can see in numbers what 8 weeks bought you.</p><p class="sub">New to training? Start Phase 1 exactly as written. Do not skip ahead; the progression is what makes the program work.</p></div><div class="card"><h2>Equipment & space</h2><p><b>At home:</b> a pair of dumbbells (or two full water bottles / rice bags), some open floor, and something sturdy to elevate feet or hands (chair, step, low table).</p><p><b>At a gym:</b> turn on “Show gym swaps” in the Workout tab. Same muscle group and same phase demand, just heavier equipment.</p><p class="sub">No GIF for a move? Swap in the closest equivalent from the same muscle group.</p></div><div class="card"><h2>🧮 Plate calculator</h2><div class="row"><input type="number" id="pcw" data-pc placeholder="Target kg" style="width:120px"><input type="number" id="pcb" data-pc value="20" style="width:80px"><span class="sub">bar kg</span></div><div id="pcr" class="sub" style="margin-top:6px">Enter a target weight.</div></div>
+<div class="card"><h2>Phase progression</h2><table><tr><th>Phase</th><th>Sets</th><th>Reps</th><th>Rest</th><th>RPE</th></tr>${[1,2,3,4].map(i=>`<tr><td><b>${i}. ${P[i].n}</b><br><span class="sub">Wk ${i*2-1}-${i*2}</span></td><td>${P[i].s}</td><td>${P[i].r}</td><td>${P[i].rest}</td><td>${P[i].rpe.split(' ')[0]}</td></tr>`).join('')}</table>
+<p class="sub">P1: form over weight — an ugly rep doesn’t count. P2: add weight only once every rep looks like Phase 1’s best. P3: 3-sec lowering on exercise #1 each day. P4: Week 7 heaviest; Week 8 half volume + retest.</p></div>
+<div class="card"><h2>RPE scale</h2><table>${RPE.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="sub">${r[2]}</td></tr>`).join('')}</table></div>
+<div class="card"><h2>Progression rules</h2><p><b>2-for-2:</b> 2 extra reps on your top set, 2 sessions in a row → increase weight/difficulty.</p><p><b>Bodyweight moves get harder, not heavier:</b> slower tempo, pause, or single-limb versions.</p><p><b>Missed a session?</b> Don’t double up; resume on the next scheduled day.</p><p><b>Pain is a stop sign, soreness is not.</b> Sharp or joint pain → swap the exercise.</p></div>
+<div class="card"><h2>Nutrition quick tips</h2><p>Protein first at every meal · Don’t fear the bhat — portion it · Water before snacks · 7+ hours of sleep.</p></div>`}
+function draw(){$('#app').innerHTML=tab=='w'?workout():tab=='p'?plan():tab=='g'?progress():guide();
+$('#nav').innerHTML=[['w','🏋️ Workout'],['p','📅 Plan'],['g','📈 Progress'],['i','📖 Guide']].map(([k,n])=>`<button class="${tab==k?'on':''}" data-t="${k}">${n}</button>`).join('')}
+function refresh(){const{w,d}=sel,s=stat(w,d);const pb=$('#pb');if(pb){pb.style.width=s.n/s.t*100+'%';$('#pt').textContent=s.n+' / '+s.t+' ticked'}}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t],[data-k],[data-go],[data-a]');if(!t)return;
+if(t.dataset.t){tab=t.dataset.t;draw();scrollTo(0,0)}
+else if(t.dataset.k){tick(t.dataset.k)}
+else if(t.dataset.go){const[w,d]=t.dataset.go.split(',').map(Number);sel={w,d};tab='w';draw();scrollTo(0,0)}
+else{const a=t.dataset.a;if(a=='prev'||a=='next'){let i=(sel.w-1)*7+sel.d+(a=='next'?1:-1);i=Math.max(0,Math.min(55,i));sel={w:Math.floor(i/7)+1,d:i%7};draw();scrollTo(0,0)}
+else if(a=='today'){sel=cur();draw()}
+else if(a=='rx'){TM.end=0;tm()}else if(a=='r+'){TM.end+=15e3;TM.tot+=15;tm()}else if(a=='r-'){TM.end-=15e3;tm()}
+else if(a=='cp'){const s=JSON.stringify(S);$('#bk').value=s;(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(()=>toast('Backup copied ✔'),()=>{$('#bk').select();toast('Select all and copy')})}
+else if(a=='imp'){try{const o=JSON.parse($('#bk').value);if(!o.c||!o.start)throw 0;S=o;save();sel=cur();draw();toast('Imported ✔')}catch(e){toast('Invalid backup')}}
+else if(a=='addm'){const o={d:iso(new Date())};['wt','wa','ch','ar','hi','bf'].forEach(k=>o[k]=$('#m_'+k).value);if(Object.values(o).slice(1).some(v=>v)){S.b.push(o);save();draw()}}
+else if(a=='reset'&&confirm('Delete ALL progress and start over?')){S={start:iso(new Date()),c:{},l:{},b:[],bs:{},re:{},gym:0};save();sel=cur();draw()}}});
+document.addEventListener('change',e=>{const t=e.target;
+if(t.dataset.a=='gym'){S.gym=t.checked?1:0;save();draw()}
+else if(t.dataset.a=='start'&&t.value){S.start=t.value;sel=cur();save();draw()}
+else if(t.dataset.sel){const y=scrollY;if(t.dataset.sel=='CX')CX=t.value;else CM=t.value;draw();scrollTo(0,y)}});
+document.addEventListener('input',e=>{const t=e.target;
+if(t.dataset.l){const[k,f]=t.dataset.l.split('|');(S.l[k]=S.l[k]||{})[f]=t.value;save()}
+else if(t.dataset.n){(S.n=S.n||{})[t.dataset.n]=t.value;save()}
+else if(t.dataset.pc!==undefined){pc()}
+else if(t.dataset.r){const[g,k]=t.dataset.r.split('|');S[g][k]=t.value;save();const a=S.bs[k],b=S.re[k],x=$('#df'+k);if(x)x.textContent=(a!==''&&a!=null&&b!==''&&b!=null)?((b-a>0?'+':'')+(b-a)):'-'}});
+draw();
+</script></body></html>
